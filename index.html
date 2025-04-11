@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$OLLY - Stay Based, Grounded and Unfazed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Inter:wght@400;600;700&display=swap">
+    <style>
+        /* Existing Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        @keyframes floatNode {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+        /* Existing Classes */
+        .font-bubblegum {
+            font-family: 'Bubblegum Sans', cursive;
+        }
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+        }
+        .text-purple-shadow {
+            text-shadow: 4px 4px 0 rgba(109, 40, 217, 0.5);
+        }
+        .bg-purple-gradient {
+            background: linear-gradient(135deg, #4c1d95 0%, #4c1d95 50%, #4c1d95 100%);
+        }
+        .bg-lime-gradient {
+            background: linear-gradient(135deg, #99c13a 0%, #99c13a 100%);
+        }
+        .vine-border {
+            border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0,50 Q25,25 50,50 T100,50' fill='none' stroke='%2399c13a' stroke-width='4'/%3E%3C/svg%3E") 30 round;
+            border-width: 8px;
+            border-style: solid;
+        }
+        .solana-node {
+            background: radial-gradient(circle, linear-gradient(135deg, #99c13a 0%, #99c13a 100%), transparent);
+        }
+        .hover-glow:hover {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.7));
+        }
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: #4c1d95;
+            font-weight: bold;
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: white transparent;
+        }
+        /* New Classes for Animations */
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        .animate-spin-slow {
+            animation: spin 10s linear infinite;
+        }
+        .animate-wiggle {
+            animation: wiggle 1.5s infinite;
+        }
+        .animate-float-node {
+            animation: floatNode 8s ease-in-out infinite;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        .tap-pulse {
+            transition: transform 0.2s ease;
+        }
+        .tap-pulse:active {
+            transform: scale(0.95);
+        }
+        .will-change-transform {
+            will-change: transform;
+        }
+        /* Custom Colors */
+        .bg-lime-500 {
+            background-color: #99c13a;
+        }
+        .hover\:bg-lime-600:hover {
+            background-color: #85a32f;
+        }
+        .text-lime-500 {
+            color: #99c13a;
+        }
+        .hover\:text-lime-400:hover {
+            color: #aacc5a;
+        }
+        .border-lime-500 {
+            border-color: #99c13a;
+        }
+        .hover\:shadow-lime-500\/30:hover {
+            box-shadow: 0 10px 15px -3px rgba(153, 193, 58, 0.3), 0 4px 6px -2px rgba(153, 193, 58, 0.3);
+        }
+    </style>
+</head>
+<body class="font-inter bg-purple-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-purple-900 bg-opacity-80 backdrop-blur-md z-50 py-4 px-6 flex justify-between items-center border-b border-purple-700">
+        <div class="flex items-center space-x-10">
+            <a href="#" class="font-bubblegum text-2xl text-yellow-300 text-glow animate-wiggle">$OLLY</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-lime-400 transition">About Solly</a>
+                <a href="#buy" class="hover:text-lime-400 transition">How to Buy</a>
+                <a href="#tokenomics" class="hover:text-lime-400 transition">Tokenomics</a>
+                <a href="#solly-world" class="hover:text-lime-400 transition">Solly’s World</a>
+                <a href="#join" class="hover:text-lime-400 transition">Join the Squad</a>
+            </div>
+        </div>
+        <button class="bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold py-2 px-6 rounded-full transition transform hover:scale-105 hover:shadow-lg hover:shadow-lime-500/30 tap-pulse">
+            BUY NOW
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen bg-purple-gradient pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 right-20 w-40 h-40 rounded-full solana-node opacity-30 animate-float-node"></div>
+            <div class="absolute bottom-40 left-20 w-60 h-60 rounded-full solana-node opacity-20 animate-float-node" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 left-1/4 w-80 h-80 rounded-full solana-node opacity-15 animate-float-node" style="animation-delay: 4s;"></div>
+            <div class="absolute top-10 left-10 w-8 h-8 text-2xl animate-float">🟣</div>
+            <div class="absolute bottom-20 right-10 w-8 h-8 text-2xl animate-float" style="animation-delay: 1s;">⚡</div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between">
+            <div class="md:w-1/2 mb-16 md:mb-0 z-10">
+                <h1 class="font-bubblegum text-6xl md:text-8xl text-yellow-300 text-glow text-purple-shadow mb-6 animate-bounce">$OLLY</h1>
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 animate-fade-in-up">Stay Based, Grounded and Unfazed with Solly on Solana</h2>
+                <p class="text-lg mb-10 max-w-lg animate-fade-in-up" style="animation-delay: 0.2s;">Join the Solly Squad in our mission to bring serenity, decentralization, and community-driven gains to the Solana ecosystem.</p>
+                <button class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-4 px-10 rounded-full text-lg transition transform hover:scale-105 animate-pulse tap-pulse">
+                    BUY $OLLY
+                </button>
+            </div>
+            
+            <div class="md:w-1/2 relative z-10 mt-12 sm:mt-16 md:mt-20">
+                <div class="relative">
+                    <img src="img/639f2abd-0d31-489b-b19d-85447b54efb4.png" alt="Solly" class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto animate-float will-change-transform" style="animation: float 6s ease-in-out infinite;">
+                    <div class="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 md:-top-10 md:-right-10 lg:-right-20 animate-wiggle">
+                        <div class="speech-bubble text-purple-900 font-bubblegum">
+                            Stay Based, Squad. 🟣⚡
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900 to-transparent z-0"></div>
+    </section>
+
+    <!-- About Solly Section -->
+    <section id="about" class="py-20 px-6 bg-purple-950 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgxMDksIDQwLCAyMTcsIDAuMDMpIj48L3JlY3Q+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIj48L3JlY3Q+PC9zdmc+')] opacity-20"></div>
+        
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 mb-12 md:mb-0 relative">
+                    <video class="w-full max-w-md mx-auto vine-border p-2 animate-wiggle will-change-transform" autoplay loop muted playsinline>
+                        <source src="img/IMG_5128.MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-lime-500 rounded-full flex items-center justify-center text-purple-900 font-bold animate-spin-slow">
+                        NFT
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h2 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">Serenity O1</h2>
+                    <h3 class="text-2xl font-bold mb-6 animate-fade-in-up">Who is Solly?</h3>
+                    
+                    <div class="bg-purple-800 bg-opacity-50 p-8 rounded-xl border-l-4 border-lime-500 relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full solana-node opacity-20 animate-float-node"></div>
+                        <p class="relative z-10">
+                            Solly, the purple-furred leader of the $OLLY token, emerged on the Solana blockchain in 2025. 
+                            Summoned into the jungle of nodes, he moves with purpose, embodying serenity and precision. 
+                            Solly leads the Solly Squad—a global movement of meme artists, developers, and NFT creators—on a 
+                            mission to build a decentralized, community-driven future. His motto, "Stay Based, Grounded and Unfazed," 
+                            inspires a new generation of culture builders.
+                        </p>
+                    </div>
+                    
+                    <button class="mt-8 bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105 animate-pulse tap-pulse">
+                        BUY $OLLY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Buy Section -->
+   <!-- How to Buy Section -->
+<section id="buy" class="py-20 px-6 bg-purple-900 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-bubblegum text-5xl text-center text-yellow-300 text-glow mb-4 animate-bounce">HOW TO BUY</h2>
+        <h3 class="text-2xl text-center font-bold mb-16 animate-fade-in-up">Join the Solly Squad in 4 chill steps!</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border relative overflow-hidden animate-fade-in-up">
+                <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full solana-node opacity-20 animate-float-node"></div>
+                <div class="w-16 h-16 bg-lime-500 rounded-full flex items-center justify-center mb-6 animate-wiggle">
+                    <span class="text-2xl font-bold">1</span>
+                </div>
+                <h4 class="text-xl font-bold mb-3">Create a Wallet</h4>
+                <p class="mb-6">Set up a Solana-compatible wallet like Phantom or Solflare.</p>
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-lime-500 hover-glow transition animate-bounce will-change-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 6h18M3 14h18M3 18h18M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full solana-node opacity-20 animate-float-node"></div>
+                <div class="w-16 h-16 bg-lime-500 rounded-full flex items-center justify-center mb-6 animate-wiggle">
+                    <span class="text-2xl font-bold">2</span>
+                </div>
+                <h4 class="text-xl font-bold mb-3">Get Some SOL</h4>
+                <p class="mb-6">Buy SOL on an exchange and send it to your wallet.</p>
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-lime-500 hover-glow transition animate-bounce will-change-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6a2 2 0 110-4 2 2 0 010 4z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.4s;">
+                <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full solana-node opacity-20 animate-float-node"></div>
+                <div class="w-16 h-16 bg-lime-500 rounded-full flex items-center justify-center mb-6 animate-wiggle">
+                    <span class="text-2xl font-bold">3</span>
+                </div>
+                <h4 class="text-xl font-bold mb-3">Go to Raydium</h4>
+                <p class="mb-6">Connect your wallet and swap SOL for $OLLY.</p>
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-lime-500 hover-glow transition animate-bounce will-change-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h8M8 15h8M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11v4m-2-2h4" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border relative overflow-hidden animate-fade-in-up" style="animation-delay: 0.6s;">
+                <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full solana-node opacity-20 animate-float-node"></div>
+                <div class="w-16 h-16 bg-lime-500 rounded-full flex items-center justify-center mb-6 animate-wiggle">
+                    <span class="text-2xl font-bold">4</span>
+                </div>
+                <h4 class="text-xl font-bold mb-3">You're in the Squad!</h4>
+                <p class="mb-6">HODL $OLLY and stay grounded with us!</p>
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-lime-500 hover-glow transition animate-bounce will-change-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="py-20 px-6 bg-purple-950 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSI2MCIgZmlsbD0icmdiYSgxMDksIDQwLCAyMTcsIDAuMDMpIj48L3JlY3Q+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIj48L3JlY3Q+PC9zdmc+')] opacity-20"></div>
+        
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-bubblegum text-5xl text-center text-yellow-300 text-glow mb-16 animate-bounce">TOKENOMICS</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <div class="bg-purple-800 bg-opacity-50 p-8 rounded-xl vine-border animate-fade-in-up">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-purple-900 p-6 rounded-lg animate-fade-in-up">
+                                <h3 class="text-lime-500 font-bold text-xl mb-2">Total Supply</h3>
+                                <p class="text-2xl">1,000,000,000 $OLLY</p>
+                            </div>
+                            <div class="bg-purple-900 p-6 rounded-lg animate-fade-in-up" style="animation-delay: 0.2s;">
+                                <h3 class="text-lime-500 font-bold text-xl mb-2">Liquidity Pool</h3>
+                                <p class="text-2xl">60%</p>
+                            </div>
+                            <div class="bg-purple-900 p-6 rounded-lg animate-fade-in-up" style="animation-delay: 0.4s;">
+                                <h3 class="text-lime-500 font-bold text-xl mb-2">Community Incentives</h3>
+                                <p class="text-2xl">20%</p>
+                            </div>
+                            <div class="bg-purple-900 p-6 rounded-lg animate-fade-in-up" style="animation-delay: 0.6s;">
+                                <h3 class="text-lime-500 font-bold text-xl mb-2">Creative Projects & Lore</h3>
+                                <p class="text-2xl">20%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-purple-800 bg-opacity-50 p-8 rounded-xl vine-border relative animate-fade-in-up">
+                        <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full solana-node opacity-30 animate-float-node"></div>
+                        <h3 class="text-2xl font-bold mb-6 text-center animate-wiggle">Solly Squad Pass</h3>
+                        <div class="flex justify-center mb-6">
+                            <img src="img/a3262f70-7291-4635-b37e-698b36a9ee6a.jfif" alt="Solly NFT" class="w-32 h-32 object-cover animate-bounce will-change-transform">
+                        </div>
+                        <p class="text-center mb-6">Created by Solly Squad</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-lime-500 hover:text-lime-400 tap-pulse">@SollyOnSolana</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Playful Section: Solly’s World -->
+    <section id="solly-world" class="py-20 px-6 bg-purple-950 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSI2MCIgZmlsbD0icmdiYSgxMDksIDQwLCAyMTcsIDAuMDMpIj48L3JlY3Q+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIj48L3JlY3Q+PC9zdmc+')] opacity-20"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 left-10 w-40 h-40 rounded-full solana-node opacity-30 animate-float-node"></div>
+            <div class="absolute bottom-20 right-20 w-60 h-60 rounded-full solana-node opacity-20 animate-float-node" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-80 h-80 rounded-full solana-node opacity-15 animate-float-node" style="animation-delay: 4s;"></div>
+            <div class="absolute top-20 left-20 w-8 h-8 text-2xl animate-float"></div>
+            <div class="absolute bottom-10 right-10 w-8 h-8 text-2xl animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/3 w-8 h-8 text-2xl animate-float" style="animation-delay: 2s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">Solly’s World </h2>
+            <h3 class="text-2xl font-bold mb-6 text-center animate-wiggle">Discover the Cute and Playful Side of $OLLY!</h3>
+
+            <!-- SlothDAO -->
+            <div class="mb-12">
+                <h4 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">SlothDAO </h4>
+                <div class="bg-purple-800 bg-opacity-50 p-8 rounded-xl border-l-4 border-lime-500 mx-auto max-w-2xl animate-fade-in-up">
+                    <p class="text-2xl font-bold mb-6 text-center animate-wiggle">
+                        The project features <span class="font-bold">SlothDAO</span>, a decentralized governance system that enables token holders to vote on proposals, campaign ideas, and narrative expansions. Join the squad and have your say in Solly’s future! 🗳️
+                    </p>
+                </div>
+            </div>
+
+            <!-- Culture and Media Presence -->
+            <div class="mb-12">
+                <h4 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">Solly in Pop Culture </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border animate-fade-in-up">
+                        <div class="text-4xl mb-4">🎥</div>
+                        <p class="text-2xl font-bold mb-6 text-center animate-wiggle">Animated short videos and lore drops</p>
+                    </div>
+                    <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="text-4xl mb-4">🖼️</div>
+                        <p class="text-2xl font-bold mb-6 text-center animate-wiggle">NFT collections based on Solly’s image</p>
+                    </div>
+                    <div class="bg-purple-800 bg-opacity-50 p-6 rounded-xl vine-border animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="text-4xl mb-4">📖</div>
+                        <p class="text-2xl font-bold mb-6 text-center animate-wiggle">Comic strips, meme packs, and fan-made games</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold mb-6 text-center animate-wiggle" style="animation-delay: 0.6s;">
+                    Solly’s storyline has drawn comparisons to cultural symbols like Doge and Pepe, but with a unique narrative-driven focus! 
+                </p>
+            </div>
+
+            <!-- Symbolism and Quotes -->
+            <div class="mb-12">
+                <h4 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">Symbolism & Quotes </h4>
+                <div class="bg-purple-800 bg-opacity-50 p-8 rounded-xl max-w-2xl mx-auto animate-fade-in-up">
+                    <p class="text-2xl font-bold mb-6 text-center animate-wiggle">"Stay Based, Grounded and Unfazed." – Movement slogan 🟣⚡</p>
+                    <p class="text-2xl font-bold mb-6 text-center animate-wiggle"><span class="font-bold">Meme Blaster 9000</span> – Solly’s lore-based meme cannon </p>
+                    <p class="text-2xl font-bold mb-6 text-center animate-wiggle"><span class="font-bold">The Jungle</span> – Metaphorical landscape of decentralized rebellion </p>
+                </div>
+            </div>
+
+            <!-- See Also -->
+            <div class="mb-12">
+                <h4 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">See Also </h4>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://solana.com" target="_blank" class="text-yellow-300 text-glow hover:text-lime-400 tap-pulse">Solana (blockchain)</a>
+                    <a href="https://en.wikipedia.org/wiki/Meme_coin" target="_blank" class="text-yellow-300 text-glow hover:text-lime-400 tap-pulse">Meme coin</a>
+                    <a href="https://en.wikipedia.org/wiki/Cryptocurrency" target="_blank" class="text-yellow-300 text-glow hover:text-lime-400 tap-pulse">Cryptocurrency culture</a>
+                </div>
+            </div>
+
+            <!-- References -->
+            <div>
+                <h4 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">References </h4>
+                <div class="text-2xl font-bold mb-6 text-center animate-wiggle">
+                    <p class="mb-2">MemeFi Times. "Solly: The Fastest Sloth in Crypto Lore." April 2025.</p>
+                    <p class="mb-2">BlockToon News. "Inside the Jungle: Solly's Rise as a Meme Icon." April 2025.</p>
+                    <p>CryptoPop Journal. "How Solly Became Solana’s Spirit Animal." April 2025.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Squad Section -->
+<section id="join" class="py-20 px-6 bg-purple-900 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="font-bubblegum text-5xl text-yellow-300 text-glow mb-6 animate-bounce">JOIN THE SQUAD</h2>
+        <h3 class="text-2xl font-bold mb-12 animate-fade-in-up">Chill with the Solly Squad and build the future!</h3>
+        
+        <div class="flex justify-center space-x-8 mb-16">
+            <!-- X Icon -->
+            <a href="#" class="w-16 h-16 bg-purple-800 rounded-full flex items-center justify-center hover:bg-lime-500 transition hover-glow animate-wiggle tap-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zM16.62 20.665h2.042L7.378 3.455H5.233l11.387 17.21z"/>
+                </svg>
+            </a>
+            <!-- Telegram (TG) Icon -->
+            <a href="https://t.me/OLLY_PORTAL" class="w-16 h-16 bg-purple-800 rounded-full flex items-center justify-center hover:bg-lime-500 transition hover-glow animate-wiggle tap-pulse" style="animation-delay: 0.2s;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.895 17.423c-.169.502-.52.88-1.008 1.053-.873.308-2.047.15-3.294-.413-2.244-1.013-4.042-1.831-5.961-2.677-.48-.211-.36-.858.127-1.023.308-.104 1.752-.548 3.433-.985 2.094-.544 2.518-.663 2.888-.49.297.139.173.614-.279.894-.873.539-2.271 1.366-3.433 2.058-.48.285-.873.539-1.008.614-.211.116-.423.023-.604-.104-.308-.211-1.752-1.155-2.518-1.693-.923-.649-.604-1.155.127-1.693 2.244-1.641 4.042-3.294 5.961-4.947 1.919-1.653 3.837-3.294 5.756-4.947.604-.519 1.155-.211 1.366.413.127.385.023.858-.308 1.366-1.641 2.518-3.294 5.036-4.947 7.554z"/>
+                </svg>
+            </a>
+         
+        </div>
+        
+        <a href="https://t.me/OLLY_PORTAL" class="bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold py-4 px-10 rounded-full text-lg transition transform hover:scale-105 hover:shadow-lg hover:shadow-lime-500/30 animate-pulse tap-pulse inline-block">
+            HOP IN!
+        </a>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-10 px-6 bg-purple-950 text-center">
+        <div class="max-w-6xl mx-auto">
+            <p class="mb-4 animate-fade-in-up">© 2023 $OLLY - All rights reserved</p>
+            <p class="text-purple-400 animate-fade-in-up" style="animation-delay: 0.2s;">Stay Based, Grounded and Unfazed</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sollyImages = document.querySelectorAll('img[alt="Solly"], img[alt="Wallet icon"], img[alt="SOL coin"], img[alt="Raydium logo"], img[alt="Thumbs up"], img[alt="Solly NFT"], img[alt="Solly footprint"]');
+            sollyImages.forEach(img => {
+                img.style.animation = `float ${4 + Math.random() * 4}s ease-in-out infinite`;
+            });
+
+            const interactiveElements = document.querySelectorAll('.tap-pulse');
+            interactiveElements.forEach(el => {
+                el.addEventListener('touchstart', () => {
+                    el.classList.add('animate-pulse');
+                });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
